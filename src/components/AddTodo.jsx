@@ -1,34 +1,35 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../features/todoSlice";
+import { addTodo } from "../features/todo/todoSlice";
+import { Plus } from "lucide-react";
 
-function AddTodo() {
-  const [input, setInput] = useState("");
+export default function AddTodo() {
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
 
-  const addTodoHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo(input));
-    setInput("");
+
+    if (!text.trim()) return;
+
+    dispatch(addTodo(text));
+    setText("");
   };
 
   return (
-    <form onSubmit={addTodoHandler} className="space-x-3 mt-12">
+    <form
+      onSubmit={handleSubmit}
+      className="relative flex items-center group mb-6"
+    >
       <input
-        type="text"
-        className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-        placeholder="Enter a Todo..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="What's on your mind?"
+        className="w-full bg-white/5 border border-white/10 py-3 px-5 rounded-2xl text-white outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-gray-500"
       />
-      <button
-        type="submit"
-        className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-      >
-        Add Todo
+      <button className="absolute right-2 bg-indigo-600 hover:bg-indigo-500 p-2 rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-500/20">
+        <Plus size={20} />
       </button>
     </form>
   );
 }
-
-export default AddTodo;
