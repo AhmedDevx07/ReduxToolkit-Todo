@@ -10,7 +10,7 @@ export default function TodoList() {
     return true;
   });
 
-  if (!filtered.length) return <p>No todos 😴</p>;
+  if (!filtered.length) return <p className="text-gray-500 text-sm">No todos</p>;
 
   return filtered.map((todo) => <TodoItem key={todo.id} todo={todo} />);
 }
