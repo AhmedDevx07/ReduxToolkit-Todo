@@ -38,7 +38,7 @@ export default function TodoItem({ todo }) {
         )}
       </div>
 
-      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="flex gap-2">
         {editing ? (
           <button
             onClick={() => {
